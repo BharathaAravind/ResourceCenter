@@ -1,0 +1,15 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingToMap" xmlns:maps="nativescript-google-maps-sdk">
+    <ActionBar title="Resources">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+    </ActionBar>
+
+  <StackLayout orientation="vertical">
+    <GridLayout height="250">
+            <maps:mapView latitude="{{ latitude }}" longitude="{{ longitude }}" mapAnimationsEnabled="{{ mapAnimationsEnabled }}"
+                                            zoom="{{ zoom }}" bearing="{{ bearing }}" 
+                                            tilt="{{ tilt }}" padding="{{ padding }}" mapReady="onMapReady"  
+                                        markerSelect="{{ onMarkerSelect }}" />
+        </GridLayout>
+
+  </StackLayout>
+</Page>

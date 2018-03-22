@@ -1,0 +1,15 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingToWeb">
+    <ActionBar title="Resources">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+        <ActionItem tap="onOpenWithBrowserClick"
+          ios.systemIcon="16" ios.position="left"
+          text="Open In App/Browser" android.position="popup">
+        </ActionItem>
+
+
+    </ActionBar>
+
+  <StackLayout>
+    <WebView loaded="webViewLoaded"  touch="webViewTouch" pan="webViewPan" src="https://www.facebook.com/events/169716073757640/" ></WebView>
+  </StackLayout>
+</Page>

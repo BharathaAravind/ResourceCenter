@@ -1,0 +1,13 @@
+<Page
+  xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingToPdf"
+  xmlns:pdf="nativescript-pdf-view">
+
+    <ActionBar title="Resources">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+    </ActionBar>
+
+    <GridLayout>
+      <pdf:PDFView src="{{ pdfUrl }}" loaded="onLoad" />
+    </GridLayout>
+
+</Page>

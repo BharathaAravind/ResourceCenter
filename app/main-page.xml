@@ -1,0 +1,155 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:lv="nativescript-ui-listview" xmlns:Card="nativescript-cardview" xmlns:ns="nativescript-carousel" loaded="loaded" 
+navigatingTo="navigatingTo" class="page">
+    <Page.actionBar>
+        <ActionBar title="Resourse Center" icon="" class="action-bar">
+        </ActionBar>
+    </Page.actionBar>
+    <ScrollView>
+    <StackLayout orientation="vertical">
+        <StackLayout>
+            <Label text="{{eventTitle}}" class="h2 text-center"/>
+        </StackLayout>
+        
+        <GridLayout margin="20,0,0,0" height="200">
+            <ns:Carousel items="{{ myDataArray }}" height="200" pageChanged="myChangeEvent" indicatorColor="#fff" 
+                finite="false" bounce="false" showIndicator="true" android:indicatorAnimation="swap">
+                <ns:Carousel.itemTemplate>
+                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" tap="myTapEvent">
+                        <Label text="{{ title }}"  horizontalAlignment="center"/>
+                        <!-- <Image src="{{ image }}" height="100" /> -->
+                    </ns:CarouselItem>
+                </ns:Carousel.itemTemplate>
+            </ns:Carousel>
+        </GridLayout>
+        <StackLayout orientation="vertical">
+            <Label text="Description" class="h2"></Label>
+            <StackLayout orientation="horizontal">
+                <Label textWrap="true" tap="expandText">
+                    <FormattedString>
+                        <Span text="{{ description }}"></Span>
+                        <Span id="seemorelabel" text="...see more" color="#551A8B" fontAttributes="Underline"></Span>
+                    </FormattedString>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout orientation="vertical">
+            <Label text="Resources" class="h2"></Label>
+            <lv:RadListView id="listview" class="list-group" itemTap="onTap"> 
+                <lv:RadListView.listViewLayout>
+                    <lv:ListViewLinearLayout  scrollDirection="Vertical"/>
+                </lv:RadListView.listViewLayout>
+                <lv:RadListView.itemTemplate>
+                    <GridLayout columns="40, *, 30" class="list-group-item" orientation="horizontal">
+                        <Label col= "0" class="icon" text="&#xE7F4;"></Label> 
+                        <Label col= "1" text="{{ itemName }}" class="list-group-item-heading" />
+                        <Label col= "2" class="icon" text="&#xE315;"></Label> 
+                    </GridLayout>
+                </lv:RadListView.itemTemplate>
+            </lv:RadListView>
+
+        </StackLayout>
+        <SegmentedBar selectedIndexChanged="onSelectedIndexChange">
+            <SegmentedBar.items>
+                <SegmentedBarItem title= "{{ tab1 }}" />
+                <SegmentedBarItem title= "{{ tab2 }}" />
+                <SegmentedBarItem title= "{{ tab3 }}" />
+            </SegmentedBar.items>
+        </SegmentedBar>
+
+        <GridLayout visibility="{{ visibility1 ? 'visible' : 'collapsed'  }}" id="fbGrid">
+                        <!-- <Label text='Facebook Page loads here' class="m-15 h3 p-5 text-center"></Label> -->
+                <WebView loaded="webViewLoaded"  touch="webViewTouch" pan="webViewPan" src="https://www.facebook.com/events/169716073757640/" ></WebView>
+        </GridLayout>
+
+        <GridLayout rows="*" visibility="{{ visibility2 ? 'visible' : 'collapsed'  }}" id="fbgrid" backgroundColor="#E0E0E0">
+                <StackLayout>     
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="50, auto, auto" columns="auto, auto, auto">
+                            <image class="profile-icon" row="0" rowSpan="2" col="0" src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" col="0" row="0" />
+                            <label text="Username" class="info" textWrap="true" row="0" rowSpan="2" col="1" colSpan="2" verticalAlignment="center" />          
+                            <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" col="1" colSpan="2" />
+                            <Label row="2" col= "0" class="like-icon" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" colSpan="2"  text="Feb2, 2018"></Label>        
+                        </grid-layout>
+                    </Card:CardView>
+
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="50, auto, auto" columns="auto, auto, auto">
+                            <image class="profile-icon" row="0" rowSpan="2" col="0" src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" col="0" row="0" />
+                            <label text="Username" class="info" textWrap="true" row="0" rowSpan="2" col="1" colSpan="2" verticalAlignment="center" />          
+                            <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" col="1" colSpan="2" />
+                            <Label row="2" col= "0" class="like-icon" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" colSpan="2"  text="Feb2, 2018"></Label>        
+                        </grid-layout>
+                    </Card:CardView>
+
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="50, auto, auto" columns="auto, auto, auto">
+                            <image class="profile-icon" row="0" rowSpan="2" col="0" src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" col="0" row="0" />
+                            <label text="Username" class="info" textWrap="true" row="0" rowSpan="2" col="1" colSpan="2" verticalAlignment="center" />          
+                            <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" col="1" colSpan="2" />
+                            <Label row="2" col= "0" class="like-icon" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" colSpan="2"  text="Feb2, 2018"></Label>        
+                        </grid-layout>
+                    </Card:CardView>
+                    
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="50, auto, auto" columns="auto, auto, auto">
+                            <image class="profile-icon" row="0" rowSpan="2" col="0" src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" col="0" row="0" />
+                            <label text="Username" class="info" textWrap="true" row="0" rowSpan="2" col="1" colSpan="2" verticalAlignment="center" />          
+                            <label text="Batman wants to be friends?" class="info" textWrap="true" row="1" col="1" colSpan="2" />
+                            <Label row="2" col= "0" class="like-icon" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" colSpan="2"  text="Feb2, 2018"></Label>        
+                        </grid-layout>
+                    </Card:CardView>
+
+                </StackLayout>
+        </GridLayout>
+
+        <GridLayout rows="*" visibility="   {{ visibility3 ? 'visible' : 'collapsed'  }}" backgroundColor="#E0E0E0">
+            <StackLayout>     
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="120, auto, auto" columns="auto, auto, *">
+                            <image src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" colSpan="3" row="0" />
+                            <label text="Batman wants to be friends?" class="insta-post" textWrap="true" row="1" colSpan="3" />
+                            <Label row="2" col= "0" class="like-icon-insta" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" text="300 likes" class="likes-label" ></Label>
+                            <Label row="2" col= "2" text="Feb2, 2018"></Label>
+                        </grid-layout>
+                    </Card:CardView>
+                    
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="120, auto, auto" columns="auto, auto, *">
+                            <image src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" colSpan="3" row="0" />
+                            <label text="Batman wants to be friends?" class="insta-post" textWrap="true" row="1" colSpan="3" />
+                            <Label row="2" col= "0" class="like-icon-insta" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" text="300 likes" class="likes-label" ></Label>
+                            <Label row="2" col= "2" text="Feb2, 2018"></Label>
+                        </grid-layout>
+                    </Card:CardView>
+                    
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="120, auto, auto" columns="auto, auto, *">
+                            <image src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" colSpan="3" row="0" />
+                            <label text="Batman wants to be friends?" class="insta-post" textWrap="true" row="1" colSpan="3" />
+                            <Label row="2" col= "0" class="like-icon-insta" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" text="300 likes" class="likes-label" ></Label>
+                            <Label row="2" col= "2" text="Feb2, 2018"></Label>
+                        </grid-layout>
+                    </Card:CardView>
+                    
+                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                        <grid-layout rows="120, auto, auto" columns="auto, auto, *">
+                            <image src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" colSpan="3" row="0" />
+                            <label text="Batman wants to be friends?" class="insta-post" textWrap="true" row="1" colSpan="3" />
+                            <Label row="2" col= "0" class="like-icon-insta" text="&#xE87E;"></Label> 
+                            <Label row="2" col= "1" text="300 likes" class="likes-label" ></Label>
+                            <Label row="2" col= "2" text="Feb2, 2018"></Label>
+                        </grid-layout>
+                    </Card:CardView>
+                     
+                </StackLayout>
+        </GridLayout>
+    </StackLayout>
+    </ScrollView>
+</Page>

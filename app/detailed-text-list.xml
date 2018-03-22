@@ -1,0 +1,9 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingToText">
+    <ActionBar title="Resources">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+    </ActionBar>
+
+  <StackLayout>
+    <Label text="This Is Text Page" class="title"/>
+  </StackLayout>
+</Page>

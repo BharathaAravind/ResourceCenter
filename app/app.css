@@ -1,0 +1,65 @@
+﻿/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme. 
+The imported CSS rules must precede all other types of rules.
+*/
+@import '~nativescript-theme-core/css/core.light.css';
+
+/*
+The following CSS rule changes the font size of all UI
+components that have the btn class name.
+*/
+.btn {
+    font-size: 18;
+}
+.cardStyle {
+    color: black;
+}
+
+.icon{
+    font-family: "Material Icons", "MaterialIcons-Regular";
+    font-size: 24px;  /* Preferred icon size */
+    color: black;
+}
+
+.profile-icon{
+    border-radius: 30;
+    margin-top: 10;
+    margin-left: 10;
+    margin-right: 10;
+    margin-bottom: 10;
+    width: 50;
+    height: 50;
+}
+.like-icon{
+    font-family: "Material Icons", "MaterialIcons-Regular";
+    font-size: 24px;  /* Preferred icon size */
+    margin-left: 20;
+    margin-bottom: 10; 
+}
+
+.like-icon-insta{
+    font-family: "Material Icons", "MaterialIcons-Regular";
+    font-size: 24px;  /* Preferred icon size */
+    margin-left: 10;
+    margin-bottom: 10; 
+}
+
+.likes-label{
+    margin-left: 10;
+    margin-right: 10;
+}
+
+.insta-post{
+    margin-left: 10;
+    margin-top: 5;
+    margin-bottom: 5;
+    
+}

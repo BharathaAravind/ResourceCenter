@@ -58,12 +58,12 @@ navigatingTo="navigatingTo" class="page">
 
         <GridLayout visibility="{{ visibility1 ? 'visible' : 'collapsed'  }}" id="fbGrid">
                         <!-- <Label text='Facebook Page loads here' class="m-15 h3 p-5 text-center"></Label> -->
-                <WebView loaded="webViewLoaded"  touch="webViewTouch" pan="webViewPan" src="https://www.facebook.com/events/169716073757640/" ></WebView>
+                <WebView src="https://www.facebook.com/events/169716073757640/" ></WebView>
         </GridLayout>
 
-        <GridLayout rows="*" visibility="{{ visibility2 ? 'visible' : 'collapsed'  }}" id="fbgrid" backgroundColor="#E0E0E0">
-                <StackLayout>     
-                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+        <GridLayout rows="*" visibility="{{ visibility2 ? 'visible' : 'collapsed'  }}" backgroundColor="#E0E0E0">
+                <StackLayout id="tweetsgrid">     
+                    <!-- <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
                         <grid-layout rows="50, auto, auto" columns="auto, auto, auto">
                             <image class="profile-icon" row="0" rowSpan="2" col="0" src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" col="0" row="0" />
                             <label text="Username" class="info" textWrap="true" row="0" rowSpan="2" col="1" colSpan="2" verticalAlignment="center" />          
@@ -101,14 +101,15 @@ navigatingTo="navigatingTo" class="page">
                             <Label row="2" col= "0" class="like-icon" text="&#xE87E;"></Label> 
                             <Label row="2" col= "1" colSpan="2"  text="Feb2, 2018"></Label>        
                         </grid-layout>
-                    </Card:CardView>
+                    </Card:CardView> -->
 
                 </StackLayout>
         </GridLayout>
 
         <GridLayout rows="*" visibility="   {{ visibility3 ? 'visible' : 'collapsed'  }}" backgroundColor="#E0E0E0">
             <StackLayout>     
-                    <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                   <WebView id="instawebview" src="{{ src }}" ></WebView>
+                    <!-- <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
                         <grid-layout rows="120, auto, auto" columns="auto, auto, *">
                             <image src="https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619" stretch="aspectFill" colSpan="3" row="0" />
                             <label text="Batman wants to be friends?" class="insta-post" textWrap="true" row="1" colSpan="3" />
@@ -146,7 +147,7 @@ navigatingTo="navigatingTo" class="page">
                             <Label row="2" col= "1" text="300 likes" class="likes-label" ></Label>
                             <Label row="2" col= "2" text="Feb2, 2018"></Label>
                         </grid-layout>
-                    </Card:CardView>
+                    </Card:CardView> -->
                      
                 </StackLayout>
         </GridLayout>

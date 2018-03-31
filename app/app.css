@@ -31,7 +31,7 @@ components that have the btn class name.
 
 .profile-icon{
     border-radius: 30;
-    margin-top: 10;
+    margin-top: 20;
     margin-left: 10;
     margin-right: 10;
     margin-bottom: 10;
@@ -56,7 +56,10 @@ components that have the btn class name.
     margin-left: 10;
     margin-right: 10;
 }
-
+.info{
+    white-space: pre-wrap;
+    
+}
 .insta-post{
     margin-left: 10;
     margin-top: 5;

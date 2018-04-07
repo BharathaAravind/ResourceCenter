@@ -7,6 +7,8 @@ import { GridLayout } from 'ui/layouts/grid-layout';
 import * as ImageModule from "tns-core-modules/ui/image";
 var observable = require("data/observable");
 var pageData = new observable.Observable();
+var videoPlayer = require("nativescript-videoplayer");
+
 var description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel interdum turpis. Proin non orci mi. Etiam lobortis quam risus, nec pellentesque est luctus quis. Nullam dolor neque, sodales vel metus eget, viverra elementum enim. Fusce a nisl iaculis, finibus enim ac, tempor nibh. In hac habitasse platea dictumst. Etiam faucibus, nisl ac molestie varius, nisl odio euismod turpis, in gravida justo arcu id lorem. Suspendisse et hendrerit tellus. Aenean pulvinar purus diam, ut luctus diam imperdiet et.
 
 Ut interdum pretium orci, non cursus ante ullamcorper aliquam. In lacinia, dui ut finibus mollis, libero ipsum viverra mauris, ac tincidunt ante dolor id est. Fusce dapibus lacus viverra vestibulum feugiat. Ut ac metus vehicula, venenatis ex sed, molestie arcu. Sed congue odio vel libero volutpat condimentum. Aliquam erat volutpat. Mauris viverra mi nibh, a finibus felis tristique non. Ut non interdum dolor.
@@ -65,7 +67,7 @@ exports.loaded = function(args) {
         bearerToken = response["_bodyInit"];
         bearerToken = JSON.parse(bearerToken).access_token;
         console.log(bearerToken);
-        fetchModule.fetch("https://api.twitter.com/1.1/search/tweets.json?q=iub&count=10&result_type=mixed", {
+        fetchModule.fetch("https://api.twitter.com/1.1/search/tweets.json?q=deletefacebook&count=10&result_type=popular", {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + bearerToken,
@@ -87,47 +89,47 @@ exports.loaded = function(args) {
     });
 
     //Instagram Api Integration
-    // pageData.set("src", "https://api.instagram.com/oauth/authorize/?client_id="+CLIENT_ID_INSTA+"&redirect_uri="+REDIRECT_URL+"&response_type=token");
+    pageData.set("src", "https://api.instagram.com/oauth/authorize/?client_id="+CLIENT_ID_INSTA+"&redirect_uri="+REDIRECT_URL+"&response_type=token");
 
-    // let webView = page.getViewById("instawebview");
+    let webView = page.getViewById("instawebview");
 
-    // if(typeof webView != "undefined"){
-    //      webView.on(webViewModule.WebView.loadFinishedEvent, function (args: webViewModule.LoadEventData) {
-    //          let message;
-    //          if (!args.error) {
-    //             message = args.url; 
-    //             if(message.includes("access_token")){
-    //                 webView.visibility = "collapsed";
-    //                 var url = message.split("access_token=");
-    //                 access_token_insta = url[1];
-    //                 console.log(access_token_insta);
-    //                 var tag = "throwback";
-    //                 console.log(tag);
-    //                 fetchModule.fetch("https://api.instagram.com/v1/tags/"+tag+"/media/recent?access_token="+access_token_insta, {
-    //                         method: "GET",
-    //                     })
-    //                 .then(function(response) {
-    //                         console.log("search api success");
-    //                         //console.log(JSON.stringify(response));
-    //                         alert(JSON.stringify(response));
+    if(typeof webView != "undefined"){
+         webView.on(webViewModule.WebView.loadFinishedEvent, function (args: webViewModule.LoadEventData) {
+             let message;
+             if (!args.error) {
+                message = args.url; 
+                if(message.includes("access_token")){
+                    webView.visibility = "collapsed";
+                    var url = message.split("access_token=");
+                    access_token_insta = url[1];
+                    console.log(access_token_insta);
+                    var tag = "throwback";
+                    console.log(tag);
+                    fetchModule.fetch("https://api.instagram.com/v1/tags/"+tag+"/media/recent?access_token="+access_token_insta, {
+                            method: "GET",
+                        })
+                    .then(function(response) {
+                            console.log("search api success");
+                            //console.log(JSON.stringify(response));
+                            //alert(JSON.stringify(response));
+                            instaTweets(args, response._bodyInit);
+                    }, function(error) {
+                            console.log("search api fail");
+                            //console.log(JSON.stringify(error));
+                    });
 
-    //                 }, function(error) {
-    //                         console.log("search api fail");
-    //                         //console.log(JSON.stringify(error));
-    //                 });
-
-    //             }
-    //              else{
-    //                 webView.visibility = "visible";
-    //              }
+                }
+                 else{
+                    webView.visibility = "visible";
+                 }
                  
-    //              console.log(message);
-    //          }
-    //          else {
-    //              message = "Error loading " + args.url + ": " + args.error;
-    //         }
-    //      });
-    // }
+                 console.log(message);
+             }
+             else {
+                 message = "Error loading " + args.url + ": " + args.error;
+            }
+         });
+    }
     
 
 
@@ -184,92 +186,9 @@ exports.loaded = function(args) {
             itemDesc: description
         }
     )
-    var page = args.object;
+    page = args.object;
     var listview = view.getViewById(page, "listview");
     listview.items = items;
-
-    // var stk = page.getViewById('tweetsgrid');
-    
-    // for(var i=0;i<1;i++){
-        
-    //     var card = new CardView();
-    //     card.margin = 10;
-    //     card.radius = 5;
-    //     card.elevation = 40;
-    //     card.className = "cardStyle";
-       
-    //     var cardContentGrid = new GridLayout();
-    //     var firstColumn = new layout.ItemSpec(1, "auto");
-    //     var secondColumn = new layout.ItemSpec(1, "auto");
-    //     var thirdColumn = new layout.ItemSpec(1, "auto");
-    //     var firstRow = new layout.ItemSpec(50, "pixel");
-    //     var secondRow = new layout.ItemSpec(1, "auto");
-    //     var thirdRow = new layout.ItemSpec(1, "auto");
-        
-    //     cardContentGrid.addColumn(firstColumn);
-    //     cardContentGrid.addColumn(secondColumn);
-    //     cardContentGrid.addColumn(thirdColumn);
-
-    //     cardContentGrid.addRow(firstRow);
-    //     cardContentGrid.addRow(secondRow);
-    //     cardContentGrid.addRow(thirdRow);
-
-    //     var image = new ImageModule.Image();
-    //     image.src = "https://vignette.wikia.nocookie.net/jerma-lore/images/0/09/Batman.jpg/revision/latest?cb=20170505210619";
-    //     image.stretch = "aspectFill"; 
-    //     image.className = "profile-icon";
-
-
-    //     cardContentGrid.addChild(image);
-    //     GridLayout.setRow(image,0);
-    //     GridLayout.setColumn(image, 0);
-    //     GridLayout.setRowSpan(image, 2);
-
-
-    //     var userNameLabel = new LabelModule.Label();
-    //     userNameLabel.text = "Username";
-    //     userNameLabel.textWrap = true;
-    //     userNameLabel.className = "info";
-    //     userNameLabel.verticalAlignment = "middle";
-
-    //     cardContentGrid.addChild(userNameLabel);
-    //     GridLayout.setRow(userNameLabel,0);
-    //     GridLayout.setRowSpan(userNameLabel,2);
-    //     GridLayout.setColumn(userNameLabel, 1);
-        
-    //     var tweetContent = new LabelModule.Label();
-    //     tweetContent.text = "Batman wants to be friends?";
-    //     tweetContent.textWrap = true;
-    //     tweetContent.className = "info";
-    //     tweetContent.verticalAlignment = "middle";
-
-    //     cardContentGrid.addChild(tweetContent);
-    //     GridLayout.setRow(tweetContent,1);
-    //     GridLayout.setColumn(tweetContent, 1);
-    //     GridLayout.setColumnSpan(tweetContent,2);
-
-    //     var likeButton = new LabelModule.Label();
-    //     likeButton.className = "like-icon";
-    //     likeButton.text = "favorite_border";
-
-    //     cardContentGrid.addChild(likeButton);
-    //     GridLayout.setRow(likeButton,2);
-    //     GridLayout.setColumn(likeButton, 0);
-        
-    //     var timeStampOfPost = new LabelModule.Label();
-    //     timeStampOfPost.text = "Feb2, 2018";
-    //     timeStampOfPost.textWrap = true;
-
-
-    //     cardContentGrid.addChild(timeStampOfPost);
-    //     GridLayout.setRow(timeStampOfPost,2);
-    //     GridLayout.setColumn(timeStampOfPost, 1);
-    //     GridLayout.setColumnSpan(timeStampOfPost, 2);
-
-    //     card.content = cardContentGrid;
-    //     console.log(stk);
-    //     stk.addChild(card);
-    // }
 
     args.object.bindingContext = pageData;
 }
@@ -329,7 +248,112 @@ exports.expandText = function(args){
         spanlabel.text="...see less";
     }
     
-    //console.log(a);  
+    
+}
+
+function instaTweets(args, response){
+    
+    response = JSON.parse(response);
+    var posts = response.data;
+    var stk = page.getViewById("instagrid");
+    posts.forEach(post => {
+
+        console.log(post.user.username);
+        console.log(post.images.standard_resolution.url);
+        console.log(post.caption.text);
+        console.log(post.likes.count);
+        
+        var card = new CardView();
+        card.margin = 10;
+        card.marginTop = 10;
+        card.radius = 5;
+        card.elevation = 40;
+        card.className = "cardStyle";
+    
+        var cardContentGrid = new GridLayout();
+        var firstColumn = new layout.ItemSpec(1, "auto");
+        var secondColumn = new layout.ItemSpec(1, "auto");
+        var thirdColumn = new layout.ItemSpec(1, "star");
+        
+        var firstRow = new layout.ItemSpec(1, "auto");
+        var secondRow = new layout.ItemSpec(1, "auto");
+        var thirdRow = new layout.ItemSpec(1, "auto");
+        
+        cardContentGrid.addColumn(firstColumn);
+        cardContentGrid.addColumn(secondColumn);
+        cardContentGrid.addColumn(thirdColumn);
+
+        cardContentGrid.addRow(firstRow);
+        cardContentGrid.addRow(secondRow);
+        cardContentGrid.addRow(thirdRow);
+
+        if(post.type == "video"){
+
+            var video = new videoPlayer.Video();
+            video.src = post.videos.standard_resolution.url;
+            console.log(post.videos.standard_resolution.url);
+            video.height = 320;
+            video.loop = true;
+            video.stretch = "aspectFill"
+            video.autoplay = true;
+            video.controls = false;
+            
+            cardContentGrid.addChild(video);
+            GridLayout.setRow(video,0);
+            GridLayout.setColumnSpan(video, 3);
+        }
+        else{
+            var image = new ImageModule.Image();
+            image.src = post.images.standard_resolution.url;
+            image.stretch = "aspectFill"; 
+            
+
+            cardContentGrid.addChild(image);
+            GridLayout.setRow(image,0);
+            GridLayout.setColumnSpan(image, 3);
+        }
+
+        var instaContent = new LabelModule.Label();
+        instaContent.text = post.user.username + ": " + post.caption.text;
+        instaContent.textWrap = true;
+        instaContent.className = "insta-post";
+
+        cardContentGrid.addChild(instaContent);
+        GridLayout.setRow(instaContent,1);
+        //GridLayout.setColumn(instaContent, 1);
+        GridLayout.setColumnSpan(instaContent,3);
+        
+        var likeButton = new LabelModule.Label();
+        likeButton.className = "like-icon";
+        likeButton.text = "favorite_border";
+
+        cardContentGrid.addChild(likeButton);
+        GridLayout.setRow(likeButton,2);
+        GridLayout.setColumn(likeButton, 0);
+        
+        var likeCount = new LabelModule.Label();
+        likeCount.text = ""+post.likes.count;
+        likeCount.className = "likes-label";
+
+        cardContentGrid.addChild(likeCount);
+        GridLayout.setRow(likeCount,2);
+        GridLayout.setColumn(likeCount, 1);
+        
+        var timeStampOfPost = new LabelModule.Label();
+        var date = new Date(post.created_time*1000);
+        timeStampOfPost.text = date.toDateString();;
+        timeStampOfPost.textWrap = true;
+
+        cardContentGrid.addChild(timeStampOfPost);
+        GridLayout.setRow(timeStampOfPost,2);
+        GridLayout.setColumn(timeStampOfPost, 2);
+        
+        card.content = cardContentGrid;
+        console.log(stk);
+        stk.addChild(card);
+    });
+    
+
 }
 
 function test(args, response){
@@ -351,8 +375,9 @@ function test(args, response){
        
         var cardContentGrid = new GridLayout();
         var firstColumn = new layout.ItemSpec(1, "auto");
-        var secondColumn = new layout.ItemSpec(80, "pixel");
+        var secondColumn = new layout.ItemSpec(250, "pixel");
         var thirdColumn = new layout.ItemSpec(1, "auto");
+        
         var firstRow = new layout.ItemSpec(50, "pixel");
         var secondRow = new layout.ItemSpec(1, "auto");
         var thirdRow = new layout.ItemSpec(1, "auto");
@@ -385,21 +410,17 @@ function test(args, response){
 
         cardContentGrid.addChild(userNameLabel);
         GridLayout.setRow(userNameLabel,0);
-        //GridLayout.setRowSpan(userNameLabel,2);
         GridLayout.setColumn(userNameLabel, 1);
         
         var tweetContent = new LabelModule.Label();
         tweetContent.text = tweets[key].text;
-        //tweetContent.textWrap = true;
+        tweetContent.textWrap = true;
         tweetContent.className = "info";
-        tweetContent.whiteSpace = "normal";
-        //tweetContent.verticalAlignment = "middle";
-
+        
         cardContentGrid.addChild(tweetContent);
         GridLayout.setRow(tweetContent,1);
         GridLayout.setColumn(tweetContent, 1);
-        GridLayout.setColumnSpan(tweetContent,2);
-
+        
         var likeButton = new LabelModule.Label();
         likeButton.className = "like-icon";
         likeButton.text = "favorite_border";
@@ -409,20 +430,20 @@ function test(args, response){
         GridLayout.setColumn(likeButton, 0);
         
         var likeCount = new LabelModule.Label();
-        likeCount.text = ""+tweets[key].favorite_count;
+        likeCount.text = ""+tweets[key].favorite_count+"  "+tweets[key].created_at.split("+")[0];;
 
         cardContentGrid.addChild(likeCount);
         GridLayout.setRow(likeCount,2);
         GridLayout.setColumn(likeCount, 1);
         
-        var timeStampOfPost = new LabelModule.Label();
-        timeStampOfPost.text = tweets[key].created_at.split("+")[0];
-        timeStampOfPost.textWrap = true;
+        // var timeStampOfPost = new LabelModule.Label();
+        // timeStampOfPost.text = tweets[key].created_at.split("+")[0];
+        // timeStampOfPost.textWrap = true;
 
 
-        cardContentGrid.addChild(timeStampOfPost);
-        GridLayout.setRow(timeStampOfPost,2);
-        GridLayout.setColumn(timeStampOfPost, 2);
+        // cardContentGrid.addChild(timeStampOfPost);
+        // GridLayout.setRow(timeStampOfPost,2);
+        // GridLayout.setColumn(timeStampOfPost, 2);
         
         card.content = cardContentGrid;
         console.log(stk);
